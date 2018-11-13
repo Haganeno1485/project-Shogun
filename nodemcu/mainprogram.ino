@@ -4,8 +4,8 @@
     #include <ESP8266WiFi.h>
     #include <ESP8266HTTPClient.h>
      
-    const char* ssid     = "BDNT-SGFnYW5lIG5v";
-    const char* password = "breakouterme";     
+    const char* ssid     = "SSID";
+    const char* password = "password";     
 
     int wifiStatus;
      
@@ -42,7 +42,7 @@ void loop() {
          Serial.println(WiFi.localIP());
          HTTPClient http;  //Declare an object of class HTTPClient
  
-         http.begin("http://192.168.43.179/dashboard/");  //Specify request destination
+         http.begin("http://localhost/dashboard/");  //Specify request destination
          int httpCode = http.GET();                                                                  //Send the request
          Serial.print("HTTP Response : ");
          Serial.println(httpCode);
