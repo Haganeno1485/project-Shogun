@@ -1,0 +1,54 @@
+package fxmlcontroller;
+
+import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+
+public class MCUNode {
+	public @FXML Button mcuBtnConnect;
+	public @FXML Button mcuBtnDisconnect;
+	public @FXML FlowPane mcuChartContainer;
+	public @FXML HBox nodeContainer;
+	public @FXML HBox mcuTop;
+	public @FXML GridPane mcuDataContainer;
+	public @FXML Label mcuName;
+	public @FXML Label mcuLblTime;
+	public @FXML Label mcuLblDate;
+	public @FXML LineChart<Number, Number> mcuChart;
+	public @FXML MenuBar mcuMenuBar;
+	public @FXML Menu mcuFileMenu;
+	public @FXML Menu mcuViewMenu;
+	public @FXML Menu mcuViewPlot;
+	public @FXML MenuItem mcuFileOpen;
+	public @FXML MenuItem mcuFileSave;
+	public @FXML MenuItem mcuFileExport;
+	public @FXML MenuItem mcuFilePrint;
+	public @FXML MenuItem mcuRecordedData;
+	public @FXML RadioMenuItem mcuPlotVIR;
+	public @FXML RadioMenuItem mcuPlotVIS;
+	public @FXML RadioMenuItem mcuPlotVIT;
+	public @FXML RadioMenuItem mcuPlotVIRST;
+	public @FXML RadioMenuItem mcuPlotPower;
+	public @FXML TextField mcuDataVR;
+	public @FXML TextField mcuDataVS;
+	public @FXML TextField mcuDataVT;
+	public @FXML TextField mcuDataIR;
+	public @FXML TextField mcuDataIS;
+	public @FXML TextField mcuDataIT;
+	public @FXML TextField mcuDataPR;
+	public @FXML TextField mcuDataPS;
+	public @FXML TextField mcuDataPT;
+	public @FXML ToggleGroup mcuPlotGroup;
+	public @FXML VBox mcuContainer;
+}
