@@ -1,4 +1,3 @@
-// Henry's Bench
 //Checking to ensure you can connect ESP-12E to a router
      
     #include <ESP8266WiFi.h>
