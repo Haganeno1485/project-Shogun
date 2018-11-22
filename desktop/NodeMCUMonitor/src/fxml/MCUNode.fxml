@@ -25,21 +25,6 @@
    <children>
       <VBox fx:id="mcuContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="435.0" prefWidth="343.0" styleClass="node-content">
          <children>
-            <HBox fx:id="mcuTop" spacing="10.0">
-               <children>
-                  <Label fx:id="mcuName" prefHeight="29.0" prefWidth="93.0" text="NodeMCU A">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </HBox>
             <MenuBar fx:id="mcuMenuBar">
                <menus>
                   <Menu fx:id="mcuFileMenu" mnemonicParsing="false" text="File">
@@ -228,7 +213,4 @@
          </HBox.margin>
       </VBox>
    </children>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
 </HBox>
