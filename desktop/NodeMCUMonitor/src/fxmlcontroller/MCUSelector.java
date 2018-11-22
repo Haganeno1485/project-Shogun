@@ -1,5 +1,7 @@
 package fxmlcontroller;
 
+import java.util.ArrayList;
+
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,6 +21,8 @@ public class MCUSelector {
 	private @FXML Label lblDate;
 	private @FXML Label lblTime;
 	
+	private ArrayList<Stage> mcuWindows = new ArrayList<>();
+ 	
 	public MCUSelector() {
 		
 	}
@@ -35,11 +39,14 @@ public class MCUSelector {
 		MCUHelper.initDate(lblDate, lblTime);
 		
 		btnGo.setOnMouseClicked(e -> {
-			mcuWindow.startMonitor(cbNodeSelect.getValue());
+			Stage stg = mcuWindow.startMonitor(cbNodeSelect.getValue());
+			if (stg != null) mcuWindows.add(stg);
 		});
 		
 		stage.setOnCloseRequest(e -> {
-			mcuWindow.stopMonitoring();
+			for (Stage stg : mcuWindows) {
+				stg.close();
+			}
 		});
 	}
 	
