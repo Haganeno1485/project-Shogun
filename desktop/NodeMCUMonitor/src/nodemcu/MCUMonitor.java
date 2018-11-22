@@ -1,6 +1,5 @@
 package nodemcu;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Random;
@@ -9,22 +8,13 @@ import fxmlcontroller.MCUNode;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 public class MCUMonitor{
 	
@@ -37,7 +27,6 @@ public class MCUMonitor{
 		mcuSeries = new HashMap<>();
 	
 	private MCUNode mcuNode = null;
-	private MCUWindow mcuWindow = null;
 	private NumberAxis mcuChartXAxis, mcuChartYAxis = null;
 	private String []seriesCodes = {
 			"vr", "vs", "vt",
@@ -45,8 +34,7 @@ public class MCUMonitor{
 			"pr", "ps", "pt",
 		};
 	
-	public MCUMonitor(String id, MCUWindow mcuWindow) {
-		this.mcuWindow = mcuWindow;
+	public MCUMonitor(String id) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.load(getClass().getResource("/fxml/mcunode.fxml").
@@ -68,18 +56,13 @@ public class MCUMonitor{
 		return this.mcuNode.mcuContainer.getId();
 	}
 	
-	public Node getMcuNode() {
-		return this.mcuNode.mcuContainer;
-	}
-	
-	public Node getMcuWholeNode() {
+	public Node getMonitor() {
 		return this.mcuNode.nodeContainer;
 	}
 	
 	private void init() {
 		this.prepareButton();
 		this.prepareChart();
-		this.prepareHeader();
 		this.prepareLabel();
 		this.prepareMenu();
 		this.prepareTextField();
@@ -151,44 +134,6 @@ public class MCUMonitor{
 					this.mcuSeries.get(key);
 			series.getData().add(new Data<>(0, 0));
 			this.mcuNode.mcuChart.getData().add(series);
-		}
-	}
-	
-	private void prepareHeader() {
-		Button btnClose = null;
-		FileInputStream input = null;
-		HBox hBox = this.mcuNode.mcuTop;
-		Label nodeLabel = this.mcuNode.mcuName;
-		try {
-			input =  new FileInputStream("src/images/btn-close.jpg");
-			Image image = new Image(input);
-	        ImageView imageView = new ImageView(image);
-	        imageView.setFitWidth(15);
-	        imageView.setFitHeight(15);
-			
-	        btnClose = new Button("", imageView);
-	        btnClose.setCursor(Cursor.HAND);
-	        btnClose.setPadding(new Insets(0, 0, 0, 0));
-	        
-	        btnClose.setOnAction(e -> {
-	        	this.flagUpdateSeries = false;
-	        	this.mcuWindow.closeNode(this);
-	        });
-	        
-	        hBox.getChildren().add(btnClose);
-	        nodeLabel.setText(this.mcuNode.mcuContainer.
-	        		getId().replace('_', ' '));
-	        input.close();
-		} catch (Exception e) {
-			MCUHelper.ringAlert(AlertType.ERROR, e.getMessage());
-		}
-		
-		if (input != null) {
-			try {
-				input.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 	
