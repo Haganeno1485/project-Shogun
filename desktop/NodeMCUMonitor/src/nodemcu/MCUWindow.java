@@ -1,5 +1,7 @@
 package nodemcu;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import javafx.scene.Scene;
@@ -9,68 +11,42 @@ import javafx.stage.Stage;
 
 public class MCUWindow {
 	
-	private ArrayList<MCUMonitor> mcuMonitors = 
-			new ArrayList<>();
-	private HBox windowRoot = null;
+	private ArrayList<String> mcuIDs = new ArrayList<>();
 	
 	public MCUWindow() {
 		
 	}
-	
-	public void closeNode(MCUMonitor mcuNode) {
-		this.windowRoot.getChildren().remove(mcuNode.getMcuNode());
-		this.mcuMonitors.remove(mcuNode);
-		if (this.windowRoot.getChildren().size() != 0) {
-			this.windowRoot.getScene().getWindow().sizeToScene();
-		}
-		if (this.mcuMonitors.isEmpty()) {
-			this.stopMonitoring();
-		}
-	}
 
-	public void startMonitor(String id) {
-		id = id.replace(' ', '_');
-		for (MCUMonitor node : this.mcuMonitors) {
-			if (node.getId().equals(id)) {
-				MCUHelper.ringAlert(AlertType.ERROR, id + " is already open!");
-				return;
-			}
+	public Stage startMonitor(String id) {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		String mcuID = id.replace(' ', '_');
+		
+		if (mcuIDs.contains(mcuID)) {
+			MCUHelper.ringAlert(AlertType.WARNING, id+" is already open!");
+			return null;
 		}
-		if (this.windowRoot == null) {
-			MCUMonitor mcuNode = new MCUMonitor(id, this);
-			this.windowRoot = (HBox)mcuNode.getMcuWholeNode();
-			Scene scene = new Scene(this.windowRoot);
-			Stage stage = new Stage();
-			
-			scene.getStylesheets().add(getClass().
-					getResource("application.css").toExternalForm());
-			
-			stage.setTitle("NodeMCU Monitor");
-			stage.setScene(scene);
-			stage.show();
-			
-			stage.setOnCloseRequest(e -> {
-				this.stopMonitoring();
-			});
-			
-			this.mcuMonitors.add(mcuNode);
-		} else {
-			MCUMonitor mcuNode = new MCUMonitor(id, this);
-			this.windowRoot.getChildren().add(mcuNode.getMcuNode());
-			this.mcuMonitors.add(mcuNode);
-			this.windowRoot.sceneProperty().get().
-				getWindow().sizeToScene();
-		}
-	}
-	
-	public void stopMonitoring() {
-		for (MCUMonitor node : this.mcuMonitors) {
-			node.stop();
-		}
-		this.mcuMonitors.clear();
-		if (this.windowRoot != null)
-			((Stage)this.windowRoot.sceneProperty().get().
-					getWindow()).close();
-		this.windowRoot = null;
+		
+		MCUMonitor mcuMonitor = new MCUMonitor(mcuID);
+		HBox root = (HBox)mcuMonitor.getMonitor();
+		Scene scene = new Scene(root);
+		Stage stage = new Stage();
+		
+		stage.setScene(scene);
+		stage.setTitle(id);
+		stage.setOnCloseRequest(e -> {
+			mcuMonitor.stop();
+		});
+		stage.show();
+		
+		double width = stage.getWidth();
+		double height = stage.getHeight();
+		
+		stage.setMaxWidth(screenSize.getWidth() / 2);
+		stage.setMinWidth(width);
+		stage.setMinHeight(height);
+		
+		mcuIDs.add(mcuID);
+		
+		return stage;
 	}
 }
