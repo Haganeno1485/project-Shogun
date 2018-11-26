@@ -23,7 +23,7 @@
 
 <HBox fx:id="nodeContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="5.0" styleClass="node-container" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxmlcontroller.MCUNode">
    <children>
-      <VBox fx:id="mcuContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="435.0" prefWidth="343.0" styleClass="node-content">
+      <VBox fx:id="mcuContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="435.0" prefWidth="343.0" styleClass="">
          <children>
             <MenuBar fx:id="mcuMenuBar">
                <menus>
@@ -56,118 +56,119 @@
                   </Menu>
                </menus>
             </MenuBar>
-            <GridPane fx:id="mcuDataContainer" hgap="5.0" vgap="5.0">
-               <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="78.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="109.0" minWidth="10.0" prefWidth="94.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="104.0" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-               </rowConstraints>
+            <FlowPane fx:id="gridContainer" styleClass="" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <VBox layoutX="40.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" styleClass="box-data, voltage" GridPane.columnIndex="2" GridPane.rowSpan="4" />
-                  <VBox layoutX="15.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" styleClass="box-data, current" GridPane.columnIndex="3" GridPane.rowSpan="4" />
-                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="box-data, power" GridPane.columnIndex="1" GridPane.rowSpan="4" />
-                  <Label text="Voltage (V)" GridPane.columnIndex="1">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets bottom="2.5" left="5.0" right="5.0" top="5.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="Current (A)" GridPane.columnIndex="2">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets bottom="2.5" left="5.0" right="5.0" top="5.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="Power (W)" GridPane.columnIndex="3">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets bottom="2.5" left="5.0" right="5.0" top="5.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <Label text="R" GridPane.rowIndex="1">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label text="S" GridPane.rowIndex="2">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label text="T" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="mcuDataVR" editable="false" prefWidth="84.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
-                     </GridPane.margin>
-                  </TextField>
-                  <TextField fx:id="mcuDataIR" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
-                     </GridPane.margin>
-                  </TextField>
-                  <TextField fx:id="mcuDataPR" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
-                     </GridPane.margin>
-                  </TextField>
-                  <TextField fx:id="mcuDataVS" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
-                     </GridPane.margin>
-                  </TextField>
-                  <TextField fx:id="mcuDataIS" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
-                     </GridPane.margin>
-                  </TextField>
-                  <TextField fx:id="mcuDataPS" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
-                     </GridPane.margin>
-                  </TextField>
-                  <TextField fx:id="mcuDataVT" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="2.5" />
-                     </GridPane.margin>
-                  </TextField>
-                  <TextField fx:id="mcuDataIT" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="2.5" />
-                     </GridPane.margin>
-                  </TextField>
-                  <TextField fx:id="mcuDataPT" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="2.5" />
-                     </GridPane.margin>
-                  </TextField>
+                  <GridPane fx:id="mcuDataContainer" hgap="5.0" vgap="5.0">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="78.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="109.0" minWidth="10.0" prefWidth="94.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="104.0" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <VBox layoutX="40.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" styleClass="box-data, voltage" GridPane.columnIndex="2" GridPane.rowSpan="4" />
+                        <VBox layoutX="15.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" styleClass="box-data, current" GridPane.columnIndex="3" GridPane.rowSpan="4" />
+                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="box-data, power" GridPane.columnIndex="1" GridPane.rowSpan="4" />
+                        <Label text="Voltage (V)" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets bottom="2.5" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Current (A)" GridPane.columnIndex="2">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets bottom="2.5" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Power (W)" GridPane.columnIndex="3">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets bottom="2.5" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="R" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="S" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="T" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="mcuDataVR" editable="false" prefWidth="84.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="mcuDataIR" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="mcuDataPR" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="mcuDataVS" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="mcuDataIS" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="mcuDataPS" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="mcuDataVT" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="2.5" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="mcuDataIT" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="2.5" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="mcuDataPT" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="2.5" />
+                           </GridPane.margin>
+                        </TextField>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                     </padding>
+                  </GridPane>
                </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
-               </padding>
-            </GridPane>
+            </FlowPane>
             <FlowPane fx:id="mcuChartContainer" prefHeight="200.0" prefWidth="200.0" styleClass="box-chart">
                <children>
                   <LineChart fx:id="mcuChart" prefHeight="200.0" prefWidth="333.0" styleClass="node-chart">
