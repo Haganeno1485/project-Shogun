@@ -31,6 +31,9 @@ public class MCUWindow {
 		Scene scene = new Scene(root);
 		Stage stage = new Stage();
 		
+		scene.getStylesheets().add(getClass().
+				getResource("application.css").toExternalForm());
+		
 		stage.setScene(scene);
 		stage.setTitle(id);
 		stage.setOnCloseRequest(e -> {
@@ -41,9 +44,16 @@ public class MCUWindow {
 		double width = stage.getWidth();
 		double height = stage.getHeight();
 		
-		stage.setMaxWidth(screenSize.getWidth() / 2);
+		stage.setMaxWidth(screenSize.getWidth() / 3);
 		stage.setMinWidth(width);
 		stage.setMinHeight(height);
+		
+		mcuMonitor.bind(stage);
+		
+		scene.setOnMouseClicked(e -> {
+			System.out.println(stage.getWidth());
+			mcuMonitor.printSizeInfo();
+		});
 		
 		mcuIDs.add(mcuID);
 		
