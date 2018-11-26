@@ -8,12 +8,14 @@ import fxmlcontroller.MCUNode;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import javafx.scene.control.Alert.AlertType;
 
 public class MCUMonitor{
@@ -154,6 +156,7 @@ public class MCUMonitor{
 	}
 	
 	private void prepareTextField() {
+		this.mcuNode.gridContainer.setAlignment(Pos.CENTER);
 		mcuDataFields.addAll(
 				this.mcuNode.mcuDataVR,
 				this.mcuNode.mcuDataVS,
@@ -182,6 +185,24 @@ public class MCUMonitor{
 				}
 			});
 		}
+	}
+	
+	public void bind(Stage stage) {
+		double ratio = this.mcuNode.mcuChartContainer.getHeight() / 
+				100 * stage.getHeight();
+		this.mcuNode.mcuContainer.prefHeightProperty().
+			bind(stage.heightProperty());
+		this.mcuNode.mcuContainer.prefWidthProperty().
+			bind(stage.widthProperty());
+		this.mcuNode.mcuChart.prefWidthProperty().
+			bind(this.mcuNode.mcuChartContainer.
+					widthProperty().subtract(20.0));
+		//this.mcuNode.mcuChartContainer.prefHeightProperty().
+		//	bind(stage.heightProperty().multiply(ratio));
+	}
+	
+	public void printSizeInfo() {
+		System.out.println(this.mcuNode.nodeContainer.getWidth());
 	}
 	
 	public void stop() {
