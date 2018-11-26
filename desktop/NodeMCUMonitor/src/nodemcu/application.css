@@ -28,3 +28,11 @@
 	-fx-border-width: 2px;
 	-fx-border-radius: 5px;
 }
+
+.bg-blue {
+	-fx-background-color: blue;
+}
+
+.bg-red {
+	-fx-background-color: red;
+}
