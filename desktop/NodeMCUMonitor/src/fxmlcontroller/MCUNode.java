@@ -19,6 +19,7 @@ public class MCUNode {
 	public @FXML Button mcuBtnConnect;
 	public @FXML Button mcuBtnDisconnect;
 	public @FXML FlowPane mcuChartContainer;
+	public @FXML FlowPane gridContainer;
 	public @FXML HBox nodeContainer;
 	public @FXML GridPane mcuDataContainer;
 	public @FXML Label mcuName;
