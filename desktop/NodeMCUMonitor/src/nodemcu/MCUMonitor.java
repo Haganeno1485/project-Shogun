@@ -194,11 +194,14 @@ public class MCUMonitor{
 			bind(stage.heightProperty());
 		this.mcuNode.mcuContainer.prefWidthProperty().
 			bind(stage.widthProperty());
+		this.mcuNode.mcuChartContainer.prefHeightProperty().
+			bind(stage.heightProperty().multiply(ratio));
 		this.mcuNode.mcuChart.prefWidthProperty().
-			bind(this.mcuNode.mcuChartContainer.
-					widthProperty().subtract(20.0));
-		//this.mcuNode.mcuChartContainer.prefHeightProperty().
-		//	bind(stage.heightProperty().multiply(ratio));
+		bind(this.mcuNode.mcuChartContainer.
+				widthProperty().subtract(20.0));
+		this.mcuNode.mcuChart.prefHeightProperty().
+		bind(this.mcuNode.mcuChartContainer.
+				heightProperty().subtract(20.0));
 	}
 	
 	public void printSizeInfo() {
