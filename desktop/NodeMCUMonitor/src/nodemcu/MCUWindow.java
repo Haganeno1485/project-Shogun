@@ -1,6 +1,9 @@
 package nodemcu;
 
 import java.awt.Dimension;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
@@ -19,6 +22,9 @@ public class MCUWindow {
 
 	public Stage startMonitor(String id) {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		GraphicsEnvironment graphEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice graphDev = graphEnv.getDefaultScreenDevice();
+		Insets insets = Toolkit.getDefaultToolkit().getScreenInsets(graphDev.getDefaultConfiguration());
 		String mcuID = id.replace(' ', '_');
 		
 		if (mcuIDs.contains(mcuID)) {
@@ -45,6 +51,7 @@ public class MCUWindow {
 		double height = stage.getHeight();
 		
 		stage.setMaxWidth(screenSize.getWidth() / 3);
+		stage.setMaxHeight(screenSize.getHeight() - insets.bottom);
 		stage.setMinWidth(width);
 		stage.setMinHeight(height);
 		
