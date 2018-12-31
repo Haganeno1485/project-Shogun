@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -17,34 +18,45 @@ public class MCUWindow {
 	private ArrayList<String> mcuIDs = new ArrayList<>();
 	
 	public MCUWindow() {
-		
+		//*/
 	}
 
-	public Stage startMonitor(String id) {
+	public Stage startMonitor(String title, String id) {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		GraphicsEnvironment graphEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice graphDev = graphEnv.getDefaultScreenDevice();
 		Insets insets = Toolkit.getDefaultToolkit().getScreenInsets(graphDev.getDefaultConfiguration());
-		String mcuID = id.replace(' ', '_');
 		
-		if (mcuIDs.contains(mcuID)) {
-			MCUHelper.ringAlert(AlertType.WARNING, id+" is already open!");
+		if (mcuIDs.contains(id)) {
+			MCUHelper.ringAlert(AlertType.WARNING, title+" is already open!");
 			return null;
 		}
 		
-		MCUMonitor mcuMonitor = new MCUMonitor(mcuID);
+		MCUMonitor mcuMonitor = new MCUMonitor(id);
 		HBox root = (HBox)mcuMonitor.getMonitor();
 		Scene scene = new Scene(root);
 		Stage stage = new Stage();
 		
 		scene.getStylesheets().add(getClass().
-				getResource("application.css").toExternalForm());
+			getResource("/css/application.css").toExternalForm());
 		
 		stage.setScene(scene);
-		stage.setTitle(id);
+		stage.setTitle(title);
 		stage.setOnCloseRequest(e -> {
 			mcuMonitor.stop();
+			mcuIDs.remove(id);
 		});
+		
+		stage.onCloseRequestProperty().set(e -> {
+			mcuMonitor.stop();
+			mcuIDs.remove(id);
+		});
+		
+		stage.getIcons().add(new Image(getClass().
+				getResourceAsStream("/images/Icon-16.png")));
+		stage.getIcons().add(new Image(getClass().
+				getResourceAsStream("/images/Icon-32.png")));
+		
 		stage.show();
 		
 		double width = stage.getWidth();
@@ -53,16 +65,10 @@ public class MCUWindow {
 		stage.setMaxWidth(screenSize.getWidth() / 3);
 		stage.setMaxHeight(screenSize.getHeight() - insets.bottom);
 		stage.setMinWidth(width);
-		stage.setMinHeight(height);
-		
+		stage.setMinHeight(height + 20.0);
 		mcuMonitor.bind(stage);
 		
-		scene.setOnMouseClicked(e -> {
-			System.out.println(stage.getWidth());
-			mcuMonitor.printSizeInfo();
-		});
-		
-		mcuIDs.add(mcuID);
+		mcuIDs.add(id);
 		
 		return stage;
 	}
