@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 
 
 public class Central extends Application {
@@ -15,8 +16,10 @@ public class Central extends Application {
 	@FXML Label lblTime;
 	
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws Exception {
 		try {
+			Image appIcon = new Image(getClass().
+					getResourceAsStream("/images/Icon-16.png"));
 			FXMLLoader loader = new FXMLLoader();
 			Parent root = null;
 			MCUSelector controller = null;
@@ -30,18 +33,26 @@ public class Central extends Application {
 			controller.init(primaryStage);
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().
-					getResource("application.css").toExternalForm());
+					getResource("/css/application.css").toExternalForm());
+			primaryStage.getIcons().add(appIcon);
+			primaryStage.getIcons().add(new Image(getClass().
+					getResourceAsStream("/images/Icon-32.png")));
 			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("NodeMCU Monitor");
 			
 			primaryStage.show();
 		} catch(Exception e) {
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}//*/
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
+		try {
+			Application.launch(args);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
